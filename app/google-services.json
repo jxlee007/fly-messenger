@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "831746373367",
+    "project_id": "fly-messenger-fe038",
+    "storage_bucket": "fly-messenger-fe038.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831746373367:android:673cc097b47c07a01505f2",
+        "android_client_info": {
+          "package_name": "com.example.fly_messenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "831746373367-qtb1n5cfl5cduphvr47isi24bakp9iqu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlwA3QS04361LPEVoNmq8orO_K1K4U58s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "831746373367-qtb1n5cfl5cduphvr47isi24bakp9iqu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

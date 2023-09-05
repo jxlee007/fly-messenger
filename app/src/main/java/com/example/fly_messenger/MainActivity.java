@@ -1,6 +1,7 @@
 package com.example.fly_messenger;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
     FirebaseDatabase database;
     ArrayList<Users> usersArrayList;
     ImageView logoutimg;
-    ImageView cambut,setbut;
+    ImageView cambut, setbut;
+    boolean isCameraOpen = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        cambut=findViewById(R.id.cambut);
-        setbut=findViewById(R.id.settingBut);
+        cambut = findViewById(R.id.cambut);
+        setbut = findViewById(R.id.settingBut);
 
         DatabaseReference reference = database.getReference().child("user");
 
@@ -99,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         setbut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,9 +113,10 @@ public class MainActivity extends AppCompatActivity {
         cambut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,10);
-                finish();
+                // Open the camera.
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, 10);
+                isCameraOpen = true; // Set the camera as open.
             }
         });
 
@@ -130,4 +132,139 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        // Check if the camera was open and handle the back button accordingly.
+        if (isCameraOpen) {
+            // Close the camera and navigate back to MainActivity.
+            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            super.onBackPressed(); // Allow the default back button behavior for other cases.
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 10) {
+            if (resultCode == RESULT_OK) {
+                // The camera was closed successfully.
+                isCameraOpen = false;
+            }
+        }
+    }
 }
+
+
+//public class MainActivity extends AppCompatActivity {
+//
+//    FirebaseAuth auth;
+//    RecyclerView mainUserRecyclerView;
+//    UserAdapter adapter;
+//    FirebaseDatabase database;
+//    ArrayList<Users> usersArrayList;
+//    ImageView logoutimg;
+//    ImageView cambut,setbut;
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_main);
+//
+//        auth = FirebaseAuth.getInstance();
+//        database = FirebaseDatabase.getInstance();
+//        cambut=findViewById(R.id.cambut);
+//        setbut=findViewById(R.id.settingBut);
+//
+//        DatabaseReference reference = database.getReference().child("user");
+//
+//        usersArrayList = new ArrayList<>();
+//
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                usersArrayList.clear(); // Clear the list before adding data
+//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                    Users users = dataSnapshot.getValue(Users.class);
+//
+//                    // Check if the retrieved user is the current user
+//                    if (auth.getCurrentUser() != null && !users.getUserId().equals(auth.getCurrentUser().getUid())) {
+//                        usersArrayList.add(users);
+//                    }
+//                }
+//                adapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//
+//        logoutimg = findViewById(R.id.logoutimg);
+//
+//        logoutimg.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Dialog dialog = new Dialog(MainActivity.this, R.style.dialoge);
+//                dialog.setContentView(R.layout.dialog_layout);
+//
+//                Button no, yes;
+//                yes = dialog.findViewById(R.id.yesbnt);
+//                no = dialog.findViewById(R.id.nobnt);
+//
+//                yes.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        FirebaseAuth.getInstance().signOut();
+//                        Intent intent = new Intent(MainActivity.this, login.class);
+//                        startActivity(intent);
+//                        finish();
+//                    }
+//                });
+//                no.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//
+//                dialog.show();
+//            }
+//        });
+//
+//
+//        setbut.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this, profile.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
+//
+//        cambut.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+//                startActivityForResult(intent,10);
+//                finish();
+//            }
+//        });
+//
+//        mainUserRecyclerView = findViewById(R.id.mainUserRecyclerView);
+//        mainUserRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        adapter = new UserAdapter(MainActivity.this, usersArrayList);
+//        mainUserRecyclerView.setAdapter(adapter);
+//
+//        // Check if the user is not logged in and redirect to the login screen
+//        if (auth.getCurrentUser() == null) {
+//            Intent intent = new Intent(MainActivity.this, login.class);
+//            startActivity(intent);
+//            finish();
+//        }
+//    }
+//}

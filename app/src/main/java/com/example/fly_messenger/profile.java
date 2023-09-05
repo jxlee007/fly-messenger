@@ -161,6 +161,15 @@ public class profile extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        // Add code here to finish the current activity and navigate back to the previous one.
+        Intent intent = new Intent(profile.this, MainActivity.class); // Replace 'PreviousActivity' with the actual name of your previous activity.
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 10) {

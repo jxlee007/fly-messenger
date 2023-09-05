@@ -77,17 +77,17 @@
         android:id="@+id/textView11"
         android:layout_width="@dimen/_75sdp"
         android:layout_height="@dimen/_20sdp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
         android:fontFamily="@font/tr_regular"
         android:gravity="center_vertical"
         android:text="Password"
         android:textColor="@color/white"
         android:textSize="@dimen/_16sdp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/edtuserpwd"
-        app:layout_constraintHorizontal_bias="0.442"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10"
-        app:layout_constraintVertical_bias="0.131"
+        app:layout_constraintVertical_bias="0.125"
         tools:ignore="HardcodedText" />
 
     <TextView
@@ -95,18 +95,18 @@
         android:layout_width="@dimen/_75sdp"
         android:layout_height="60dp"
 
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
         android:fontFamily="@font/tr_regular"
         android:gravity="center_vertical"
         android:text="Re-enter\nPassword"
         android:textColor="@color/white"
+
         android:textSize="@dimen/_16sdp"
         app:layout_constraintBottom_toBottomOf="parent"
-
-        app:layout_constraintEnd_toStartOf="@+id/reenterpwd"
-        app:layout_constraintHorizontal_bias="0.442"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11"
-        app:layout_constraintVertical_bias="0.132"
+        app:layout_constraintVertical_bias="0.113"
         tools:ignore="HardcodedText" />
 
     <Button
@@ -172,8 +172,7 @@
         android:textColorHint="@color/grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.827"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
         app:layout_constraintTop_toBottomOf="@+id/edtuseremail"
         app:layout_constraintVertical_bias="0.072"
         tools:ignore="HardcodedText" />
@@ -189,10 +188,10 @@
         android:textColorHint="@color/grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.827"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toEndOf="@+id/textView12"
         app:layout_constraintTop_toBottomOf="@+id/edtuserpwd"
-        app:layout_constraintVertical_bias="0.12"
+        app:layout_constraintVertical_bias="0.117"
         tools:ignore="HardcodedText" />
 
     <TextView
